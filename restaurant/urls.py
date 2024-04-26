@@ -20,6 +20,6 @@ from .views import render
 
 
 urlpatterns = [
-        path('restaurant/', render)
+        path('/restaurant/', render)
 
 ]
