@@ -16,10 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import render 
+from restaurant import views
 
 
 urlpatterns = [
-        path('/restaurant/', render)
+        path('restaurant/', views.index),
+        path('menu/', views.MenuItemsView.as_view()),
+        path('menu/<int:pk>', views.SingleMenuItemView.as_view()),
 
 ]
