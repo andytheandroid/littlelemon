@@ -52,12 +52,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'restaurant.urls'
+ROOT_URLCONF = 'littlelemon.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['restaurant/', 'templates/'],
+        'DIRS': ['restaurant/', 'templates/','littlelemon/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -20,6 +20,8 @@ from restaurant import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('restaurant/',views.index, name='index')
+    path('restaurant/',views.index, name='index'),
+    path('menu/', views.MenuItemsView.as_view()),
+    path('restaurant/menu/',include('restaurant.urls'))
 
 ]
