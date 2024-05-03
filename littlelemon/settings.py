@@ -40,8 +40,11 @@ INSTALLED_APPS = [
     'restaurant',
     'rest_framework',
     'littlelemon',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'djoser'
 ]
+
+DJOSER={"USER_ID_FIELD":"username"}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,6 +57,16 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'littlelemon.urls'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+       'rest_framework.authentication.TokenAuthentication',  
+        'rest_framework.authentication.SessionAuthentication'  
+
+    ]
+    
+}
 
 TEMPLATES = [
     {
