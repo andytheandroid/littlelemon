@@ -15,6 +15,9 @@ class MenuItemSerializer(serializers.ModelSerializer):
 
 
 class BookingSerializer(serializers.ModelSerializer):
-   class Meta:
+    Name = serializers.CharField(max_length = 255);
+    No_of_guests = serializers.IntegerField();
+    BookingData = serializers.DateField();
+    class Meta:
      model = Booking
      fields = '__all__' 
