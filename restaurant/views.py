@@ -31,6 +31,11 @@ class BookingViewSet(ModelViewSet):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
 
+class MenuItemViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    queryset = MenuItem.objects.all()
+    serializer_class = MenuItemSerializer
+
 
 @api_view()
 @permission_classes([IsAuthenticated])

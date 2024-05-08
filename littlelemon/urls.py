@@ -22,11 +22,14 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 router = routers.SimpleRouter()
 router.register(r'tables', views.BookingViewSet)
+menuitemrouter = routers.SimpleRouter()
+menuitemrouter.register(r'items', views.MenuItemViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('restaurant/',views.index, name='index'),
     path('menu/', views.MenuItemsView.as_view()),
+    path('menu-items/', include(menuitemrouter.urls)),
     path('restaurant/menu/',include('restaurant.urls')),
     path('restaurant/booking/', include(router.urls)),
     path('booking/', include(router.urls)),
