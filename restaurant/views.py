@@ -12,23 +12,22 @@ from rest_framework.decorators import api_view, permission_classes
 def index(request):
   return render(request, 'index.html', {})
 
-
-
-@permission_classes([IsAuthenticated])
+def about(request):
+  return render(request, 'about.html', {})
 
 class MenuItemsView(ListCreateAPIView):
+  permission_classes = [IsAuthenticated]
   queryset = MenuItem.objects.all()
   serializer_class = MenuItemSerializer
 
-
-@permission_classes([IsAuthenticated])
 
 class SingleMenuItemView(RetrieveUpdateAPIView, DestroyAPIView):
-  queryset = MenuItem.objects.all()
-  serializer_class = MenuItemSerializer
+   permission_classes = [IsAuthenticated]
+   queryset = MenuItem.objects.all()
+   serializer_class = MenuItemSerializer
 
-@permission_classes([IsAuthenticated])
 class BookingViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
 

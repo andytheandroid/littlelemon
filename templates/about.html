@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Little Lemon</title>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{% static 'img/logo.png' %}" alt="Little Lemon logo">
+        </div>
+        <nav>
+            <ul>
+                <li>Home</a></li>
+                <li>Menu</li>
+                <li>About</li>
+                <li>Contact</li>
+                <li>Reservation</li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="about-section">
+            <div class="about-content">
+                <h1>About Little Lemon</h1>
+                <p>Little Lemon is a family-owned Mediterranean restaurant, focused on traditional recipes served with a modern twist. The restaurant was founded by two Italian-Greek brothers, who moved to the United States to pursue their shared dream of opening a restaurant.</p>
+                <p>Our menu features a variety of dishes inspired by the flavors of the Mediterranean, with a focus on fresh, locally-sourced ingredients. From our signature dishes like Moussaka and Spanakopita, to our daily specials and seasonal offerings, we strive to provide our guests with a unique and memorable dining experience.</p>
+                <p>At Little Lemon, we believe that great food is about more than just the ingredients – it's about the passion and care that goes into every dish. That's why we take pride in our commitment to quality, and in the warm, welcoming atmosphere that we've created in our restaurant.</p>
+            </div>
+            <div class="about-image">
+                <img src="{% static 'img/about-image.jpg' %}" alt="Little Lemon restaurant">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Little Lemon. All rights reserved.</p>
+    </footer>
+</body>
+</html>
