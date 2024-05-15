@@ -1,5 +1,8 @@
 # LittleLemon
 
+
+By Carlos Torres Sanchez
+
 LittleLemon is a project in Django that provides APIs for managing menus, menu items, and bookings.
 
 ## Getting Started
