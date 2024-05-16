@@ -4,3 +4,4 @@ restaurant/__pycache__/models.cpython-312.pyc
 restaurant/__pycache__/serializers.cpython-312.pyc
 *.pyc
 *.pyc
+*.pyc

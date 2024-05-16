@@ -1,0 +1,93 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Littledfdf Lemon</title>
+    <meta name="description" content="A brief description" />
+    <meta
+      name="author"
+      content="Based in Chicago, Illinois, Little Lemon is a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist."
+    />
+
+    <!-- Load favicon -->
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'img/favicon.ico' %}"
+    />
+
+    <!-- Include your CSS files here -->
+    <link
+      rel="preload"
+      as="style"
+      href="{% static 'css/style.css' %}"
+      onload="this.rel = 'stylesheet'"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Karla&family=Markazi+Text:wght@500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+<header>
+  <img src="{% static 'img/logo.png' %}" />
+    </header>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="#">Menu</a></li>
+        <li><a href="{% url 'book' %}">Book</a></li>
+      </ul>
+  </nav>
+<body>
+<section>
+  
+    
+    <article>
+      <h2>Opening Hours</h2>
+      <img src="{% static 'img/head_chef.jpg' %}">
+      <p>
+        The Little Lemon Restaurant is open 7 days a week, except for public holidays. 
+      </p>
+      <ul>
+        <li>Mon - Fri: 2pm - 10pm</li>
+        <li>Sat: 2pm - 11pm</li>
+        <li>Sun: 2pm - 9pm</li>
+      </ul>
+    </article>
+    <article>
+      <h2>Book a Table</h2>
+      <form action="#" method="post">
+        {% csrf_token %}
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+        <label for="time">Time:</label>
+        <input type="time" id="time" name="time" required>
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" required>
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" required>
+        <button type="submit">Book Now</button>
+      </form>
+    </article>
+  </section>
+      </ul>
+    </article>
+  </section>
+  <footer>
+    <article>
+      <img src="{% static 'img/logo_footer.png' %}" />
+    </article>
+    <article>
+      <p>Copyright {{ current_year }} Little Lemon</p>
+    </article>
+  </footer>
+</body>
+</html>

@@ -37,7 +37,9 @@ urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
     path('api-token-auth/', obtain_auth_token),
-    path('restaurant/about/', views.about, name='about')
+    path('restaurant/about/', views.about, name='about'),
+    path('restaurant/bookTable', views.book, name="book")
+
     
 
 
