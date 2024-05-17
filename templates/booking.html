@@ -43,7 +43,7 @@
         <li><a href="#">Home</a></li>
         <li><a href="{% url 'about' %}">About</a></li>
         <li><a href="#">Menu</a></li>
-        <li><a href="{% url 'book' %}">Book</a></li>
+        <li><a href="{% url 'book_table' %}">Book</a></li>
       </ul>
   </nav>
 <body>
@@ -62,21 +62,16 @@
         <li>Sun: 2pm - 9pm</li>
       </ul>
     </article>
-    <article>
+       <article>
+
       <h2>Book a Table</h2>
-      <form action="#" method="post">
-        {% csrf_token %}
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date" required>
-        <label for="time">Time:</label>
-        <input type="time" id="time" name="time" required>
-        <label for="first_name">First Name:</label>
-        <input type="text" id="first_name" name="first_name" required>
-        <label for="last_name">Last Name:</label>
-        <input type="text" id="last_name" name="last_name" required>
-        <button type="submit">Book Now</button>
+      <form action="" method="post">
+         {% csrf_token %} 
+        {{ form }}
+        <input type="submit" value="Submit">
       </form>
-    </article>
+       </article>
+
   </section>
       </ul>
     </article>
