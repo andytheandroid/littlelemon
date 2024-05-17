@@ -19,10 +19,6 @@ def index(request):
     return render(request, 'index.html', {})
 
 
-def login(request):
-    return render(request, 'login.html', {})
-
-
 def about(request):
     return render(request, 'about.html', {})
 
@@ -64,6 +60,12 @@ def login_user(request):
                 return HttpResponseRedirect('/restaurant/?login=success')
 
     return HttpResponseRedirect('/restaurant/?login=fail')
+
+
+def sign_up_user(request):
+    form = LoginForm()
+    context = {'form': form}
+    return render(request, 'signup.html', context)
 
 
 class MenuItemsView(ListCreateAPIView):

@@ -39,6 +39,7 @@ urlpatterns = [
     path('api-token-auth/', obtain_auth_token),
     path('restaurant/about/', views.about, name='about'),
     path('restaurant/bookTable', views.book_table, name="book_table"),
-    path('restaurant/loginUser', views.login_user, name="login_user")
+    path('restaurant/loginUser', views.login_user, name="login_user"),
+    path('restaurant/newUser', views.sign_up_user, name="sign_up_user")
 
 ]
