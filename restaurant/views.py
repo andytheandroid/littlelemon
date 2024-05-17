@@ -29,9 +29,12 @@ def book_table(request):
     if request.method == "POST":
         form = BookingForm(request.POST)
         if form.is_valid():
-            # Process the form data (e.g., save to database)
-            # Redirect to a success page or render a different template
-            return HttpResponseRedirect('/success/')
+            name = form.cleaned_data['name']
+            number_of_guests = form.cleaned_data['number_of_guests']
+            reservation_date = form.cleaned_data['reservation_date']
+            reservation = Booking(Name=name, No_of_guests=number_of_guests, BookingData=reservation_date)
+            reservation.save()
+            return HttpResponseRedirect('/restaurant/?booking=success')
     else:
         form = BookingForm()  # Initialize an empty form for GET requests
 
