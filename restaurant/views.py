@@ -9,12 +9,18 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.contrib import messages
+from django.contrib.auth import login, authenticate
 
-from .forms import BookingForm
+from .forms import BookingForm, LoginForm
 
 
 def index(request):
     return render(request, 'index.html', {})
+
+
+def login(request):
+    return render(request, 'login.html', {})
 
 
 def about(request):
@@ -40,6 +46,24 @@ def book_table(request):
 
     context = {'form': form}
     return render(request, 'booking.html', context)
+
+
+def login_user(request):
+    if request.method == 'GET':
+        form = LoginForm()
+        context = {'form': form}
+        return render(request, 'login.html', context)
+    elif request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=name, password=password)
+            if user is not None:
+                login(request)
+                return HttpResponseRedirect('/restaurant/?login=success')
+
+    return HttpResponseRedirect('/restaurant/?login=fail')
 
 
 class MenuItemsView(ListCreateAPIView):

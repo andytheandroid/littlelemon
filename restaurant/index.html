@@ -106,9 +106,25 @@
 
 <script type="text/javascript">
     window.onload = function() {
-        // Check if 'booking' query parameter is set to 'success'
         if (new URLSearchParams(window.location.search).get('booking') === 'success') {
             alert('Your reservation has been successfully booked!');
+        }
+    }
+</script>
+
+
+<script type="text/javascript">
+    window.onload = function() {
+        if (new URLSearchParams(window.location.search).get('login') === 'success') {
+            alert('Welcome to little Lemon');
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    window.onload = function() {
+        if (new URLSearchParams(window.location.search).get('login') === 'fail') {
+            alert('Cannot login to Little Lemon please verify your credentials');
         }
     }
 </script>

@@ -5,3 +5,6 @@ restaurant/__pycache__/serializers.cpython-312.pyc
 *.pyc
 *.pyc
 *.pyc
+*.pyc
+restaurant/__pycache__/urls.cpython-312.pyc
+restaurant/__pycache__/views.cpython-312.pyc
