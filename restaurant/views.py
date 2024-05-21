@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework.authtoken.admin import User
 from rest_framework.decorators import api_view
 from rest_framework.generics import *
 from rest_framework.viewsets import ModelViewSet
@@ -12,7 +13,7 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 
-from .forms import BookingForm, LoginForm
+from .forms import BookingForm, LoginForm, SignUpForm
 
 
 def index(request):
@@ -56,16 +57,21 @@ def login_user(request):
             password = form.cleaned_data['password']
             user = authenticate(request, username=name, password=password)
             if user is not None:
-                login(request)
+                login(request,user)
                 return HttpResponseRedirect('/restaurant/?login=success')
 
     return HttpResponseRedirect('/restaurant/?login=fail')
 
 
 def sign_up_user(request):
-    form = LoginForm()
-    context = {'form': form}
-    return render(request, 'signup.html', context)
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/restaurant/?registration=success')
+    else:
+        form = SignUpForm()
+    return render(request, 'signup.html', {'form': form})
 
 
 class MenuItemsView(ListCreateAPIView):

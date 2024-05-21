@@ -102,30 +102,30 @@
     </article>
   </footer>
 </body>
-
-
 <script type="text/javascript">
     window.onload = function() {
-        if (new URLSearchParams(window.location.search).get('booking') === 'success') {
-            alert('Your reservation has been successfully booked!');
-        }
-    }
-</script>
+        const urlParams = new URLSearchParams(window.location.search);
 
+        const alerts = {
+            booking: {
+                success: 'Your reservation has been successfully booked!',
+            },
+            login: {
+                success: 'Welcome to Little Lemon',
+                fail: 'Cannot login to Little Lemon, please verify your credentials',
+            },
+            registration: {
+                success: 'User Registered Successfully',
+            },
+        };
 
-<script type="text/javascript">
-    window.onload = function() {
-        if (new URLSearchParams(window.location.search).get('login') === 'success') {
-            alert('Welcome to little Lemon');
+        for (const [param, messages] of Object.entries(alerts)) {
+            const value = urlParams.get(param);
+            if (value && messages[value]) {
+                alert(messages[value]);
+                break;
+            }
         }
-    }
-</script>
-
-<script type="text/javascript">
-    window.onload = function() {
-        if (new URLSearchParams(window.location.search).get('login') === 'fail') {
-            alert('Cannot login to Little Lemon please verify your credentials');
-        }
-    }
+    };
 </script>
 </html>

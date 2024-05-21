@@ -1,6 +1,8 @@
 from django.db import models
 
 
+
+
 class Booking(models.Model):
     Name = models.CharField(max_length=255)
     No_of_guests = models.IntegerField(5)
