@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'littlelemon',
     'rest_framework.authtoken',
-    'djoser'
+    'djoser',
+    'inventory'
 ]
 
 DJOSER={"USER_ID_FIELD":"username"}
