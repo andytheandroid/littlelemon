@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Karla&family=Markazi+Text&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <header>
+        <h1>Little lemon Inventory Admin</h1>
+    </header>
+
+    <nav>
+        <ul class="tabs">
+            <li><a href="#ingredients" class="active">Ingredients</a></li>
+            <li><a href="#menu-items">Menu Items</a></li>
+            <li><a href="#recipes">Recipes</a></li>
+            <li><a href="#purchase-reports">Purchase Reports</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="ingredients" class="tab-content active">
+            <h2>Ingredient List</h2>
+            </section>
+
+        <section id="menu-items" class="tab-content">
+            <h2>Menu Items</h2>
+            </section>
+
+        <section id="recipes" class="tab-content">
+            <h2>Recipes</h2>
+            </section>
+
+        <section id="purchase-reports" class="tab-content">
+            <h2>Purchase Reports</h2>
+            </section>
+    </main>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab-content');
+const tabLinks = document.querySelectorAll('.tabs a');
+
+tabLinks.forEach(link => {
+    link.addEventListener('click', event => {
+        event.preventDefault();
+
+        tabs.forEach(tab => tab.classList.remove('active'));
+        tabLinks.forEach(link => link.classList.remove('active'));
+
+        const targetId = link.getAttribute('href');
+        document.querySelector(targetId).classList.add('active');
+        link.classList.add('active');
+    });
+});
+
+// Show the first tab by default (if needed)
+document.querySelector('.tab-content').classList.add('active');
+
+    </script>
+</body>
+</html>

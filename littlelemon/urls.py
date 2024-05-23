@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from restaurant import views
+from inventory import views as inventory_views
 from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 
@@ -40,6 +41,6 @@ urlpatterns = [
     path('restaurant/about/', views.about, name='about'),
     path('restaurant/bookTable', views.book_table, name="book_table"),
     path('restaurant/loginUser', views.login_user, name="login_user"),
-    path('restaurant/newUser', views.sign_up_user, name="sign_up_user")
-
+    path('restaurant/newUser', views.sign_up_user, name="sign_up_user"),
+    path('inventory/admin', inventory_views.inventory, name="inventory")
 ]

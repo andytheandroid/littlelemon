@@ -280,3 +280,29 @@ footer p {
     float: right;
     cursor: pointer;
 }
+
+/* Tab-specific styles */
+.tabs {
+    list-style: none;
+    padding: 0;
+    display: flex; /* Use flexbox for even spacing */
+    justify-content: space-around;
+    background-color: #495E57;
+    margin: 0;
+}
+
+.tabs li {
+    flex: 1; /* Distribute tabs evenly */
+    text-align: center;
+}
+
+.tabs a {
+    display: block;
+    padding: 1rem;
+    color: #EDEFEE;
+    text-decoration: none;
+}
+
+.tabs a.active {
+    background-color: #EE9972; /* Active tab color */
+}
