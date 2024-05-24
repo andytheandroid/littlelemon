@@ -1,66 +1,115 @@
 {% load static %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory Admin</title>
-    <link href="https://fonts.googleapis.com/css2?family=Karla&family=Markazi+Text&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Required meta tags -->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<!-- Document Title -->
+		<title>Vertical Tabs CSS Using HTML & JavaScript</title>
+
+
+		<!-- Icon Fonts -->
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+
+
+
+
+
+     <!-- Load favicon -->
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'img/favicon.ico' %}"
+    />
+
+    <!-- Include your CSS files here -->
+    <link
+      rel="preload"
+      as="style"
+      href="{% static 'css/inventory.css' %}"
+      onload="this.rel = 'stylesheet'"
+    />
+
+    <title>Inventory</title>
 </head>
-<body>
+<body class="home">
+		<div class="site-wrapper">
+			<section class="article-wrapper">
+				<div class="article-container">
+					<div class="article-block">
+						<div class="entry-content">
+							<h1>Restaurant Inventory System</h1>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="tabs-wrapper">
+				<div class="tabs-container">
+					<div class="tabs-block">
+						<div id="tabs-section" class="tabs">
+							<ul class="tab-head">
+								<li>
+									<a href="#tab-1" class="tab-link active"> <span class="material-symbols-outlined">
+grocery
+</span> <span class="tab-label">Ingredientes</span></a>
+								</li>
+								<li>
+									<a href="#tab-2" class="tab-link"> <span class="material-icons tab-icon">menu_book</span> <span class="tab-label">Menu items</span></a>
+								</li>
+								<li>
+									<a href="#tab-3" class="tab-link"> <span class="material-icons tab-icon">shopping_cart</span> <span class="tab-label">Purchases</span></a>
+								</li>
+								<li>
+									<a href="#tab-4" class="tab-link"> <span class="material-icons tab-icon">paid</span> <span class="tab-label">Profits</span></a>
+								</li>
+								
+							</ul>
 
-    <header>
-        <h1>Little lemon Inventory Admin</h1>
-    </header>
+							<section id="tab-1" class="tab-body entry-content active active-content">
+								<h2>Ingredients</h2>
+								Coming soon
+							</section>
 
-    <nav>
-        <ul class="tabs">
-            <li><a href="#ingredients" class="active">Ingredients</a></li>
-            <li><a href="#menu-items">Menu Items</a></li>
-            <li><a href="#recipes">Recipes</a></li>
-            <li><a href="#purchase-reports">Purchase Reports</a></li>
-        </ul>
-    </nav>
+							<section id="tab-2" class="tab-body entry-content">
+								<h2>Menu item</h2>
+							</section>
 
-    <main>
-        <section id="ingredients" class="tab-content active">
-            <h2>Ingredient List</h2>
-            </section>
+							<section id="tab-3" class="tab-body entry-content">
+								<h2>Purchases</h2>
+								
+                            </section>
 
-        <section id="menu-items" class="tab-content">
-            <h2>Menu Items</h2>
-            </section>
+							<section id="tab-4" class="tab-body entry-content">
+								<h2>Profits and Reports</h2>
+								
+							</section>
 
-        <section id="recipes" class="tab-content">
-            <h2>Recipes</h2>
-            </section>
-
-        <section id="purchase-reports" class="tab-content">
-            <h2>Purchase Reports</h2>
-            </section>
-    </main>
-
-    <script>
-        const tabs = document.querySelectorAll('.tab-content');
-const tabLinks = document.querySelectorAll('.tabs a');
-
-tabLinks.forEach(link => {
-    link.addEventListener('click', event => {
-        event.preventDefault();
-
-        tabs.forEach(tab => tab.classList.remove('active'));
-        tabLinks.forEach(link => link.classList.remove('active'));
-
-        const targetId = link.getAttribute('href');
-        document.querySelector(targetId).classList.add('active');
-        link.classList.add('active');
-    });
-});
-
-// Show the first tab by default (if needed)
-document.querySelector('.tab-content').classList.add('active');
-
-    </script>
-</body>
+							
+						</div>
+					</div>
+				</div>
+			</section>
+			<footer>
+				<div class="credits"><a href="https://htmlcssfreebies.com/vertical-tabs-css/" target="_blank">Powered by Vertical Tabs CSS Template</a> by HTMLCSSFreebies.</div>
+			    <article>
+      <p>Copyright {{ current_year }} Little Lemon</p>
+    </article>
+            </footer>
+		</div>
+		<!-- Javascript Files -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="{% static 'js/app.js' %}"></script>
+	</body>
 </html>
