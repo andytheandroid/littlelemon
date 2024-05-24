@@ -61,9 +61,13 @@
 						<div id="tabs-section" class="tabs">
 							<ul class="tab-head">
 								<li>
-									<a href="#tab-1" class="tab-link active"> <span class="material-symbols-outlined">
+									<a href="#tab-1" class="tab-link active"> 
+                                        <span class="material-symbols-outlined">
 grocery
-</span> <span class="tab-label">Ingredientes</span></a>
+</span>
+                                        <span class="tab-label">Ingredientes</span></a>
+                                    
+                                    
 								</li>
 								<li>
 									<a href="#tab-2" class="tab-link"> <span class="material-icons tab-icon">menu_book</span> <span class="tab-label">Menu items</span></a>
@@ -79,11 +83,24 @@ grocery
 
 							<section id="tab-1" class="tab-body entry-content active active-content">
 								<h2>Ingredients</h2>
-								Coming soon
+                                <form action="#" method="post">
+         {% csrf_token %}
+          {{form.as_p}}
+        <input type="submit" value="Submit">
+                                </form>
+                                
+                                
+                                
 							</section>
 
 							<section id="tab-2" class="tab-body entry-content">
 								<h2>Menu item</h2>
+                                
+                                <form action="#" method="post">
+         {% csrf_token %}
+          {{loginform.as_p}}
+        <input type="submit" value="Submit">
+                                </form>
 							</section>
 
 							<section id="tab-3" class="tab-body entry-content">

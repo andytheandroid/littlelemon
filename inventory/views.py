@@ -5,13 +5,20 @@ from django.shortcuts import render
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
 
-from inventory.forms import InventoryLoginForm
+from inventory.forms import InventoryLoginForm, IngredientsForm
 
 
 # Create your views here.
 
 def inventory(request):
-    return render(request, 'restaurantAdmin.html', {})
+    form = IngredientsForm()
+    loginform = InventoryLoginForm()
+    context = {'form': form, "loginform": loginform}
+    return render(request, 'restaurantAdmin.html', context)
+
+
+def addNewIngredient(request):
+    pass
 
 
 def login_user(request):

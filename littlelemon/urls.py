@@ -43,6 +43,6 @@ urlpatterns = [
     path('restaurant/loginUser', views.login_user, name="login_user"),
     path('restaurant/newUser', views.sign_up_user, name="sign_up_user"),
     path('inventory/admin/', inventory_views.inventory, name="inventory"),
-    path('inventory/adminLogin/', inventory_views.login_user, name="inventoryLogin")
+    path('inventory/adminLogin/', inventory_views.login_user, name="inventoryLogin"),
 
 ]
