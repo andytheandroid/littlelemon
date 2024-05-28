@@ -17,6 +17,7 @@
 
 		<!-- Icon Fonts -->
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 		<!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -62,10 +63,10 @@
 							<ul class="tab-head">
 								<li>
 									<a href="#tab-1" class="tab-link active"> 
-                                        <span class="material-symbols-outlined">
-grocery
+                                      <span class="material-symbols-outlined">
+lunch_dining
 </span>
-                                        <span class="tab-label">Ingredientes</span></a>
+                                        <span class="tab-label">Ingredients</span></a>
                                     
                                     
 								</li>
@@ -89,28 +90,34 @@ grocery
         <input type="submit" value="Submit">
                                 </form>
                                 
+                                {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
                                 
+
                                 
 							</section>
 
 							<section id="tab-2" class="tab-body entry-content">
 								<h2>Menu item</h2>
                                 
-                                <form action="#" method="post">
-         {% csrf_token %}
-          {{loginform.as_p}}
-        <input type="submit" value="Submit">
-                                </form>
+                                    Coming soon
 							</section>
 
 							<section id="tab-3" class="tab-body entry-content">
 								<h2>Purchases</h2>
-								
+								                                    Coming soon
+
                             </section>
 
 							<section id="tab-4" class="tab-body entry-content">
 								<h2>Profits and Reports</h2>
-								
+								                                    Coming soon
+
 							</section>
 
 							
