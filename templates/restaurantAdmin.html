@@ -62,27 +62,39 @@
 						<div id="tabs-section" class="tabs">
 							<ul class="tab-head">
 								<li>
-									<a href="#tab-1" class="tab-link active"> 
+									<a href="#tab-0" class="tab-link active"> 
                                       <span class="material-symbols-outlined">
 lunch_dining
 </span>
-                                        <span class="tab-label">Ingredients</span></a>
+                                        <span class="tab-label"> Add Ingredients</span></a>
+                                    
+                                    
+								</li>
+                                <li>
+									<a href="#tab-1" class="tab-link"> 
+                                      <span class="material-symbols-outlined">
+lunch_dining
+</span>
+                                        <span class="tab-label">Manage Ingredients</span></a>
                                     
                                     
 								</li>
 								<li>
-									<a href="#tab-2" class="tab-link"> <span class="material-icons tab-icon">menu_book</span> <span class="tab-label">Menu items</span></a>
+									<a href="#tab-2" class="tab-link"> <span class="material-icons tab-icon">menu_book</span> <span class="tab-label">Add Menu items</span></a>
+								</li>
+                                <li>
+									<a href="#tab-3" class="tab-link"> <span class="material-icons tab-icon">menu_book</span> <span class="tab-label">Manage Menu items</span></a>
 								</li>
 								<li>
-									<a href="#tab-3" class="tab-link"> <span class="material-icons tab-icon">shopping_cart</span> <span class="tab-label">Purchases</span></a>
+									<a href="#tab-4" class="tab-link"> <span class="material-icons tab-icon">shopping_cart</span> <span class="tab-label">Purchases</span></a>
 								</li>
 								<li>
-									<a href="#tab-4" class="tab-link"> <span class="material-icons tab-icon">paid</span> <span class="tab-label">Profits</span></a>
+									<a href="#tab-5" class="tab-link"> <span class="material-icons tab-icon">paid</span> <span class="tab-label">Profits</span></a>
 								</li>
 								
 							</ul>
 
-							<section id="tab-1" class="tab-body entry-content active active-content">
+							<section id="tab-0" class="tab-body entry-content active active-content">
 								<h2>Ingredients</h2>
                                 <form action="#" method="post">
          {% csrf_token %}
@@ -101,20 +113,28 @@ lunch_dining
 
                                 
 							</section>
-
-							<section id="tab-2" class="tab-body entry-content">
+    <section id="tab-1" class="tab-body entry-content">
+								<h2>Ingredient Management</h2>
+                                
+                                    Coming soon
+							</section>
+                        
+                           
+							<section id="tab-3" class="tab-body entry-content">
 								<h2>Menu item</h2>
                                 
                                     Coming soon
 							</section>
 
-							<section id="tab-3" class="tab-body entry-content">
+                           
+                        
+							<section id="tab-4" class="tab-body entry-content">
 								<h2>Purchases</h2>
 								                                    Coming soon
 
                             </section>
 
-							<section id="tab-4" class="tab-body entry-content">
+							<section id="tab-5" class="tab-body entry-content">
 								<h2>Profits and Reports</h2>
 								                                    Coming soon
 
