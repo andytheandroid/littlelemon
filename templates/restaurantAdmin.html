@@ -116,11 +116,18 @@ lunch_dining
     <section id="tab-1" class="tab-body entry-content">
 								<h2>Ingredient Management</h2>
                                 
-                                    Coming soon
+                             <div id="ingredientContainer">
+    <table id="ingredientList"></table> 
+</div>
+
+                                 
+                                 
+                                 
+
 							</section>
                         
                            
-							<section id="tab-3" class="tab-body entry-content">
+							<section id="tab-2" class="tab-body entry-content">
 								<h2>Menu item</h2>
                                 
                                     Coming soon
@@ -128,13 +135,13 @@ lunch_dining
 
                            
                         
-							<section id="tab-4" class="tab-body entry-content">
+							<section id="tab-3" class="tab-body entry-content">
 								<h2>Purchases</h2>
 								                                    Coming soon
 
                             </section>
 
-							<section id="tab-5" class="tab-body entry-content">
+							<section id="tab-4" class="tab-body entry-content">
 								<h2>Profits and Reports</h2>
 								                                    Coming soon
 
@@ -155,5 +162,73 @@ lunch_dining
 		<!-- Javascript Files -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 		<script src="{% static 'js/app.js' %}"></script>
+        <script>
+            $.ajax({
+    url: '/inventory/admin/getIngredients',  // Your Django endpoint URL
+    type: 'GET',
+    success: function(response) {
+        // Handle the JSON response from the Django endpoint
+        console.log("the ingredients are");
+        console.log(response); // Log the ingredient data
+
+        // Update your frontend with the ingredient data
+        displayIngredients(response);
+    },
+    error: function(xhr, status, error) {
+        // Handle errors (e.g., display an error message to the user)
+        console.error('AJAX Error:', error); 
+    }
+});
+
+function displayIngredients(ingredients) {
+    const ingredientList = $('#ingredientList'); 
+    ingredientList.empty();
+
+    // Start with the table structure
+    ingredientList.append('<table></table>');
+    const table = ingredientList.find('table');
+
+    // Table header (optional but recommended)
+    table.append('<tr><th>Ingredient</th><th>Quantity</th><th>Unit</th></tr>'); 
+
+    for (const ingredient of ingredients) {
+        // Ensure properties exist before using them
+        const quantity = ingredient.qty || ""; 
+        const unit = ingredient.unit_price || "";
+
+        // Create table rows dynamically
+        table.append(`
+            <tr>
+                <td>${ingredient.name}</td>
+                <td>${quantity}</td>
+                <td>${unit}</td> 
+<td>
+                    <button class="edit-btn" >Edit</button>
+                    <button class="delete-btn" >Delete</button>
+                </td>
+            </tr>
+        `);
+    }
+    
+    // Attach event listeners after the table is populated
+$('#ingredientList').on('click', '.edit-btn', function() {
+    const index = $(this).data('index');
+    const ingredient = ingredients[index];
+    alert("Edit button clicked for "+ingredient);
+    
+});
+
+$('#ingredientList').on('click', '.delete-btn', function() {
+    const index = $(this).data('index');
+    const ingredient = ingredients[index];
+    alert("Delete button clicked for "+ingredient);
+
+
+});
+    
+    
+    
+}
+        </script>
 	</body>
 </html>

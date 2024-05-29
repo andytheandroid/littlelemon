@@ -4,10 +4,12 @@ from django.shortcuts import render, redirect
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.contrib import messages
-
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.generics import *
 
 from inventory.forms import InventoryLoginForm, IngredientsForm
 from inventory.models import Ingredient
+from inventory.serializers import IngredientSerializer
 
 
 # Create your views here.
@@ -16,7 +18,6 @@ def inventory(request):
     form = IngredientsForm()
     context = {'form': form}
     if request.method == 'GET':
-
         return render(request, 'restaurantAdmin.html', context)
 
     if request.method == 'POST':
@@ -28,12 +29,12 @@ def inventory(request):
             ingredient = Ingredient(name=name, qty=qty, unit_price=unit_price)
             ingredient.save()
             messages.success(request, f"Ingredient '{name}' added successfully!")
-            return render(request, 'restaurantAdmin.html',{"form": form})
+            return render(request, 'restaurantAdmin.html', {"form": form})
 
         else:
 
             messages.error(request, "Please correct the errors in the form.")
-            return render(request, 'restaurantAdmin.html',{form:form})
+            return render(request, 'restaurantAdmin.html', {form: form})
 
 
 def login_user(request):
@@ -57,3 +58,15 @@ def login_user(request):
 @permission_classes([IsAuthenticated])
 def loginInventory(request):
     return render(request, 'inventorylogin.html', {})
+
+
+class IngredientsView(ListCreateAPIView):
+    queryset = Ingredient.objects.all()
+    serializer_class = IngredientSerializer
+
+
+def ingredients_list(request):
+    view = IngredientsView.as_view()
+    response = view(request)
+    ingredients = response.data  # Extract the serialized data
+    return render(request, 'restaurantAdmin.html', {'ingredients': ingredients})
