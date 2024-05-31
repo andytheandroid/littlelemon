@@ -1,15 +1,20 @@
 from django.contrib.auth import authenticate, login
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.shortcuts import render, redirect
+from pymysql import IntegrityError
+from rest_framework import viewsets
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.contrib import messages
+from rest_framework.utils import json
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import *
-
-from inventory.forms import InventoryLoginForm, IngredientsForm
+from django.views.generic.edit import UpdateView, DeleteView
+from inventory.forms import InventoryLoginForm, IngredientsForm, EditIngredientForm
 from inventory.models import Ingredient
 from inventory.serializers import IngredientSerializer
+from django.http import JsonResponse
+
 
 
 # Create your views here.
@@ -65,8 +70,45 @@ class IngredientsView(ListCreateAPIView):
     serializer_class = IngredientSerializer
 
 
+class UpdateIngredients(UpdateView):
+    model = Ingredient
+    fields = ['name', 'qty', 'unit_price']
+    template_name = 'restaurantAdmin.html'
+
+
+def get_form_class(self):
+    return EditIngredientForm
+
+class IngredientDeleteView(DeleteView):
+    model = Ingredient
+
+
 def ingredients_list(request):
     view = IngredientsView.as_view()
     response = view(request)
     ingredients = response.data  # Extract the serialized data
     return render(request, 'restaurantAdmin.html', {'ingredients': ingredients})
+
+
+def update_ingredient(request,pk):
+    if request.method != "PUT":
+        return JsonResponse({"error": "Only PUT requests are allowed"}, status=405)  # Method Not Allowed
+
+    try:
+        data = json.loads(request.body)
+
+    except json.JSONDecodeError:
+        return JsonResponse({"error": "Invalid JSON data"}, status=400)  # Bad Request
+
+    obj = Ingredient.objects.get(pk=data["id"])
+    for field, value in data.items():
+        # Example of selective field updating:
+        if field in ["name", "price", "quantity"]:
+            setattr(obj, field, value)
+
+    try:
+        obj.save()  # Save the updated object to the database
+        return JsonResponse({"message": "Data updated successfully", "data": data}, status=200)
+    except IntegrityError as e:
+        # Handle unique constraint violations or other DB errors
+        return JsonResponse({"error": f"Database error: {str(e)}"}, status=400)

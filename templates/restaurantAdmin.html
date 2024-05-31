@@ -152,6 +152,25 @@ lunch_dining
 					</div>
 				</div>
 			</section>
+
+        <div id="editIngredientModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <h2>Edit Ingredient</h2>
+        <form  action = "#" id="editIngredientForm">
+            {% csrf_token %}
+            <input type="hidden" id="ingredientId" name="ingredientId">
+            <label for="ingredientName">Name:</label>
+            <input type="text" id="ingredientName" name="ingredientName">
+            <label for="unitPrice">Unit Price:</label>
+            <input type="number" id="unitPrice" name="unitPrice" step="0.01" min="0" placeholder="0.00">
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" min="0">
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+</div>
 			<footer>
 				<div class="credits"><a href="https://htmlcssfreebies.com/vertical-tabs-css/" target="_blank">Powered by Vertical Tabs CSS Template</a> by HTMLCSSFreebies.</div>
 			    <article>
@@ -164,14 +183,14 @@ lunch_dining
 		<script src="{% static 'js/app.js' %}"></script>
         <script>
             $.ajax({
-    url: '/inventory/admin/getIngredients',  // Your Django endpoint URL
+    url: '/inventory/admin/getIngredients',  // Django endpoint URL
     type: 'GET',
     success: function(response) {
         // Handle the JSON response from the Django endpoint
         console.log("the ingredients are");
         console.log(response); // Log the ingredient data
 
-        // Update your frontend with the ingredient data
+        // Update  frontend with the ingredient data
         displayIngredients(response);
     },
     error: function(xhr, status, error) {
@@ -203,20 +222,23 @@ function displayIngredients(ingredients) {
                 <td>${quantity}</td>
                 <td>${unit}</td> 
 <td>
-                    <button class="edit-btn" >Edit</button>
+                    <button class="edit" id=edit_${ingredient.id}>Edit</button>
                     <button class="delete-btn" >Delete</button>
                 </td>
             </tr>
         `);
+
+
+        const editingredientButtonId = document.getElementById("edit_"+ingredient.id);
+            console.log(editingredientButtonId);
+            editingredientButtonId.addEventListener("click", () => {
+            editIngredient("edit_"+ingredient.id, ingredient.name,unit,quantity);
+    });
+
     }
-    
-    // Attach event listeners after the table is populated
-$('#ingredientList').on('click', '.edit-btn', function() {
-    const index = $(this).data('index');
-    const ingredient = ingredients[index];
-    alert("Edit button clicked for "+ingredient);
-    
-});
+
+
+
 
 $('#ingredientList').on('click', '.delete-btn', function() {
     const index = $(this).data('index');
@@ -229,6 +251,85 @@ $('#ingredientList').on('click', '.delete-btn', function() {
     
     
 }
+
+function editIngredient(id,name,price,qty) {
+     // Get references to modal elements
+    const modal = document.getElementById("editIngredientModal");
+    const ingredientIdInput = document.getElementById("ingredientId");
+    const ingredientNameInput = document.getElementById("ingredientName");
+    const ingredientPriceInput = document.getElementById("unitPrice");
+    const ingredientQtyInput = document.getElementById("quantity");
+  
+    const form = document.getElementById("editIngredientForm");
+
+    // Fill modal with existing data
+    ingredientIdInput.value = id;
+    ingredientNameInput.value = name;
+    ingredientPriceInput.value = price;
+    ingredientQtyInput.value = qty;
+
+    // Show the modal
+    modal.style.display = "block";
+
+    // Handle form submission
+    form.addEventListener("submit", (event) => {
+        event.preventDefault(); // Prevent default form submission
+        const csrfToken = getCookie('csrftoken');
+        // Get updated values from the form
+        const updatedId = ingredientIdInput.value;
+        const updatedName = ingredientNameInput.value;
+        const updatedPrice = ingredientPriceInput.value;
+        const updatedQty = ingredientQtyInput.value;
+        
+        
+        
+        
+        const idValue = id.split("_");
+
+        fetch('/inventory/admin/ingredientsUpdate/'+idValue[1]+'/', {
+            method: 'PUT', 
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            },
+            body: JSON.stringify({ 
+    id: idValue[1],
+    name: updatedName,
+    price: updatedPrice,  
+    quantity: updatedQty  
+})
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            // Handle successful update (e.g., close modal, refresh list)
+            console.log("sucessfull update of ingredient");
+            closeModal();
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            // Handle errors (e.g., show error message)
+        });
+        
+        
+    });
+
+
+
+}
+function closeModal() {
+    document.getElementById("editIngredientModal").style.display = "none";
+}
+
+function getCookie(name) {
+			const value = `; ${document.cookie}`;
+			const parts = value.split(`; ${name}=`);
+			if (parts.length === 2) return parts.pop().split(';').shift();
+		}
+
+
+
         </script>
 	</body>
 </html>

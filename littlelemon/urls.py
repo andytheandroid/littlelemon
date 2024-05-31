@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+
+from inventory.views import IngredientDeleteView, UpdateIngredients
 from restaurant import views
 from inventory import views as inventory_views
 from rest_framework import routers
@@ -45,5 +47,7 @@ urlpatterns = [
     path('inventory/admin/', inventory_views.inventory, name="inventory"),
     path('inventory/admin/getIngredients', inventory_views.IngredientsView.as_view()),
     path('inventory/adminLogin/', inventory_views.login_user, name="inventoryLogin"),
+    path('inventory/admin/ingredientsUpdate/<int:pk>/', inventory_views.update_ingredient, name="ingredientsUpdate"),
+    path('ingredients/delete/<int:pk>/', IngredientDeleteView.as_view(), name='ingredient_delete'),
 
 ]
