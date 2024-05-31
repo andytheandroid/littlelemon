@@ -9,7 +9,7 @@ class IngredientSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'qty', 'unit_price']
 
 
-class MenuInventoryItem(serializers.ModelSerializer):
+class MenuInventoryItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = MenuInventoryItem
         fields = ['id', 'name', 'price', 'description']

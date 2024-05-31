@@ -140,8 +140,13 @@ lunch_dining
                            
                         
 							<section id="tab-3" class="tab-body entry-content">
-								<h2>Purchases</h2>
-								                                    Coming soon
+								<h2>All Menu Dishes</h2>
+								            
+                                 <div id="menuItemContainer">
+    <table id="MenuList"></table> 
+</div>
+                                
+                                
 
                             </section>
 
@@ -202,6 +207,26 @@ lunch_dining
         console.error('AJAX Error:', error); 
     }
 });
+            
+            $.ajax({
+    url: '/inventory/admin/getMenuItems',  // Django endpoint URL
+    type: 'GET',
+    success: function(response) {
+        console.log("the dishes are");
+        console.log(response); 
+
+        // Update  frontend with the ingredient data
+        displayMenuItems(response);
+    },
+    error: function(xhr, status, error) {
+        // Handle errors (e.g., display an error message to the user)
+        console.error('AJAX Error:', error); 
+    }
+});
+            
+  
+ 
+            
 
 function displayIngredients(ingredients) {
     const ingredientList = $('#ingredientList'); 
@@ -363,7 +388,36 @@ function getCookie(name) {
 			if (parts.length === 2) return parts.pop().split(';').shift();
 		}
 
+ function displayMenuItems(dishes) {
 
+     const menuList = $('#MenuList');
+     menuList.empty();
+
+     // Start with the table structure
+     menuList.append('<table></table>');
+     const table = menuList.find('table');
+
+     // Table header (optional but recommended)
+     table.append('<tr><th>Dish</th><th>Price</th><th>Description</th></tr>');
+
+     for (const dish of dishes) {
+
+
+         // Create table rows dynamically
+         table.append(`
+            <tr>
+                <td>${dish.name}</td>
+                <td>${dish.price}</td>
+                <td>${dish.description}</td> 
+<td>
+                    <button class="edit" >Edit</button>
+                    <button class="delete-btn" >Delete</button>
+                </td>
+            </tr>
+        `);
+
+     }
+ }
 
         </script>
 	</body>

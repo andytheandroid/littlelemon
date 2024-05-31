@@ -46,6 +46,7 @@ urlpatterns = [
     path('restaurant/newUser', views.sign_up_user, name="sign_up_user"),
     path('inventory/admin/', inventory_views.inventory, name="inventory"),
     path('inventory/admin/getIngredients', inventory_views.IngredientsView.as_view()),
+    path('inventory/admin/getMenuItems', inventory_views.MenuItemsView.as_view()),
     path('inventory/adminLogin/', inventory_views.login_user, name="inventoryLogin"),
     path('inventory/admin/ingredientsUpdate/<int:pk>/', inventory_views.update_ingredient, name="ingredientsUpdate"),
     path('inventory/admin/ingredientsDelete/<int:pk>/', IngredientDeleteView.as_view(), name='ingredient_delete'),

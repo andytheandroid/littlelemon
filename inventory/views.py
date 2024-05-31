@@ -12,11 +12,12 @@ from rest_framework.generics import *
 from django.views.generic.edit import UpdateView, DeleteView
 from inventory.forms import InventoryLoginForm, IngredientsForm, EditIngredientForm, MenuItemForm
 from inventory.models import Ingredient, MenuInventoryItem
-from inventory.serializers import IngredientSerializer
+from inventory.serializers import IngredientSerializer, MenuInventoryItemSerializer
 from django.http import JsonResponse
 from django.urls import reverse_lazy
 
 from restaurant.models import MenuItem
+from restaurant.serializers import MenuItemSerializer
 
 
 # Create your views here.
@@ -89,6 +90,11 @@ def loginInventory(request):
 class IngredientsView(ListCreateAPIView):
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
+
+
+class MenuItemsView(ListCreateAPIView):
+    queryset = MenuInventoryItem.objects.all()
+    serializer_class = MenuInventoryItemSerializer
 
 
 class UpdateIngredients(UpdateView):
