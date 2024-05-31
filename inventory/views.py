@@ -14,7 +14,7 @@ from inventory.forms import InventoryLoginForm, IngredientsForm, EditIngredientF
 from inventory.models import Ingredient
 from inventory.serializers import IngredientSerializer
 from django.http import JsonResponse
-
+from django.urls import reverse_lazy
 
 
 # Create your views here.
@@ -79,8 +79,10 @@ class UpdateIngredients(UpdateView):
 def get_form_class(self):
     return EditIngredientForm
 
+
 class IngredientDeleteView(DeleteView):
     model = Ingredient
+    success_url = "templates/restaurantAdmin.html"
 
 
 def ingredients_list(request):
@@ -90,21 +92,21 @@ def ingredients_list(request):
     return render(request, 'restaurantAdmin.html', {'ingredients': ingredients})
 
 
-def update_ingredient(request,pk):
+def update_ingredient(request, pk):
     if request.method != "PUT":
         return JsonResponse({"error": "Only PUT requests are allowed"}, status=405)  # Method Not Allowed
 
     try:
         data = json.loads(request.body)
-
+        print(data)
     except json.JSONDecodeError:
         return JsonResponse({"error": "Invalid JSON data"}, status=400)  # Bad Request
 
     obj = Ingredient.objects.get(pk=data["id"])
-    for field, value in data.items():
-        # Example of selective field updating:
-        if field in ["name", "price", "quantity"]:
-            setattr(obj, field, value)
+    obj.name = data["name"]
+    obj.qty = data["quantity"]
+    obj.unit_price = data["price"]
+    print(obj)
 
     try:
         obj.save()  # Save the updated object to the database
