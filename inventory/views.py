@@ -11,36 +11,56 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import *
 from django.views.generic.edit import UpdateView, DeleteView
 from inventory.forms import InventoryLoginForm, IngredientsForm, EditIngredientForm, MenuItemForm
-from inventory.models import Ingredient
+from inventory.models import Ingredient, MenuInventoryItem
 from inventory.serializers import IngredientSerializer
 from django.http import JsonResponse
 from django.urls import reverse_lazy
+
+from restaurant.models import MenuItem
 
 
 # Create your views here.
 
 def inventory(request):
-    form = IngredientsForm()
-    menuForm = MenuItemForm()
-    context = {'form': form,"menuItemForm":menuForm}
+    form = IngredientsForm(prefix='ingredient')
+    menuForm = MenuItemForm(prefix='menuitem')
+    context = {'form': form, "menuItemForm": menuForm}
+    print(menuForm.prefix)
+
     if request.method == 'GET':
         return render(request, 'restaurantAdmin.html', context)
 
     if request.method == 'POST':
+
         form = IngredientsForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            qty = form.cleaned_data['qty']
-            unit_price = form.cleaned_data['unitary_price']
-            ingredient = Ingredient(name=name, qty=qty, unit_price=unit_price)
-            ingredient.save()
-            messages.success(request, f"Ingredient '{name}' added successfully!")
-            return render(request, 'restaurantAdmin.html', {"form": form})
+        if form.prefix == 'ingredient':
 
-        else:
+            if form.is_valid():
+                name = form.cleaned_data['name']
+                qty = form.cleaned_data['qty']
+                unit_price = form.cleaned_data['unitary_price']
+                ingredient = Ingredient(name=name, qty=qty, unit_price=unit_price)
+                ingredient.save()
+                messages.success(request, f"Ingredient '{name}' added successfully!")
+                return render(request, 'restaurantAdmin.html', {"form": form})
 
-            messages.error(request, "Please correct the errors in the form.")
-            return render(request, 'restaurantAdmin.html', {form: form})
+            else:
+
+                messages.error(request, "Please correct the errors in the form.")
+
+        if menuForm.prefix == 'menuitem':
+            menu_item_form = MenuItemForm(request.POST, prefix='menuitem')
+            print(menu_item_form.prefix)
+            if menu_item_form.is_valid():
+                name = menu_item_form.cleaned_data['name']
+                price = menu_item_form.cleaned_data['price']
+                description = menu_item_form.cleaned_data['description']
+                menuItem = MenuInventoryItem(name=name, price=price, description=description)
+                menuItem.save()
+                messages.success(request, f"Menu Item '{menu_item_form.cleaned_data['name']}' added successfully!")
+            else:
+                messages.error(request, "Please correct the errors in the menu item form.")
+    return render(request, 'restaurantAdmin.html', context)
 
 
 def login_user(request):
