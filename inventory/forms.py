@@ -1,5 +1,3 @@
-
-
 from django import forms
 
 
@@ -19,3 +17,9 @@ class EditIngredientForm(forms.Form):
     ingredientName = forms.CharField(label="Name")
     unitPrice = forms.DecimalField(label="Unit Price", decimal_places=2, min_value=0)
     quantity = forms.IntegerField(label="Quantity", min_value=0)
+
+
+class MenuItemForm(forms.Form):
+    name = forms.CharField(label="Name", max_length=100)
+    price = forms.DecimalField(label="Price per unit", decimal_places=2, min_value=0)
+    description = forms.CharField(label="Description", widget=forms.Textarea)

@@ -129,8 +129,12 @@ lunch_dining
                            
 							<section id="tab-2" class="tab-body entry-content">
 								<h2>Menu item</h2>
-                                
-                                    Coming soon
+                                <form action="#" method="post">
+         {% csrf_token %}
+          {{menuItemForm.as_p}}
+        <input type="submit" value="Submit">
+                                </form>
+                                    
 							</section>
 
                            

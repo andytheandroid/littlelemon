@@ -10,7 +10,7 @@ from rest_framework.utils import json
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import *
 from django.views.generic.edit import UpdateView, DeleteView
-from inventory.forms import InventoryLoginForm, IngredientsForm, EditIngredientForm
+from inventory.forms import InventoryLoginForm, IngredientsForm, EditIngredientForm, MenuItemForm
 from inventory.models import Ingredient
 from inventory.serializers import IngredientSerializer
 from django.http import JsonResponse
@@ -21,7 +21,8 @@ from django.urls import reverse_lazy
 
 def inventory(request):
     form = IngredientsForm()
-    context = {'form': form}
+    menuForm = MenuItemForm()
+    context = {'form': form,"menuItemForm":menuForm}
     if request.method == 'GET':
         return render(request, 'restaurantAdmin.html', context)
 
